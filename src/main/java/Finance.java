@@ -42,15 +42,17 @@ public class Finance {
 
     public static void main(String[] args){
         String command = args[0];
-        if(commandsToUsage.containsKey(command)) {
+        if(!commandsToUsage.containsKey(command)) {
+            System.out.print(command + ": command not found"+"\n");
+            return;
+        }
 
-            boolean isValidCommand = validateCommandArguments(args);
-            if (isValidCommand == false) {
-                commandsToUsage.get(args[0]);
-                return;
+        boolean isValidCommand = validateCommandArguments(args);
+        if (!isValidCommand) {
+            System.out.print(commandsToUsage.get(args[0])+"\n");
+            return;
             }
-            executeCommand(command, Arrays.copyOfRange(args, 1, args.length));
-        }else
-            System.out.print(command + ": command not found"+ "\n");
+
+        executeCommand(command, Arrays.copyOfRange(args, 1, args.length));
     }
 }
